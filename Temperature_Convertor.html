@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <style>
+        *{
+            text-align: center;
+            color: black;
+            font-family: 'Times New Roman', Times, serif;
+            font-style: italic;
+            font-size: large;
+        }
+        div
+        {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50% ,-50%);
+        }
+        #calcTemp {
+            padding: 20px;
+            box-shadow: rgba(34, 24, 209, 0.12) 0px 1px 3px, rgba(243, 140, 23, 0.24) 0px 1px 2px;
+        }
+        fieldset{
+            height: fit-content;
+            width: 500px;
+            border: 5px solid rgb(238, 42, 160);
+            margin: 20px;
+        }
+        #temp
+        {
+            margin:20px ;
+            float: left;
+            border: 3px solid rgb(97, 42, 238);
+        }
+        #temp_type
+        {
+            margin:20px ;
+            float: right;
+            border: 3px solid rgb(97, 42, 238);
+        }
+        #submit
+        {
+            margin: 50px 0 10px 0;
+            border: 3px solid rgb(97, 42, 238);
+        }
+        #submit:hover
+        {
+            background-image: url(Image.jpg);
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+        #result
+        {
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        const calculate_temperature = () =>{
+            const temperature=document.getElementById('temp').value;
+            const tempType=document.getElementById('temp_type');
+            const value_type=temp_type.options[tempType.selectedIndex].value;
+            const celsius_to_fahrenheit=(celsius)=>{
+                let fahren=((celsius*9/5)+32).toFixed(5);
+                return fahren;
+            }
+            const fahrenheit_to_celsius=(fahrenheit)=>
+            {
+                let cels=((fahrenheit-32)*(5/9)).toFixed(5);
+                return cels;
+            }
+            if (value_type=="select_t")
+            {
+                document.getElementById("result").innerHTML="Please select the input temperature type";
+            }
+            else if(value_type=="celsius")
+            {
+                document.getElementById("result").innerHTML=celsius_to_fahrenheit(temperature)+" &#176;Fahrenheit"
+            }
+            else {
+                document.getElementById("result").innerHTML=fahrenheit_to_celsius(temperature)+" &#176;Celsius"
+            }
+        } 
+    </script>
+</head>
+<body style="background-image: url(backgroundImage.jpg); background-size: cover;">
+    <div>
+        <fieldset>
+            <legend><h1 style="text-align: center;">Temperature Converter</h1></legend>
+            <form id="calcTemp" onsubmit="calculate_temperature();return false">
+                <label for="temp"><b>Enter the Value of Temperature to Convert</b></label>
+                <br>
+                <input type="number" name="temp" id="temp" value="0">
+                <select id="temp_type" name="temp_type">
+                    <option value="select_t">
+                        select
+                    </option>
+                    <option value="celsius">
+                        &#176Celsius
+                    </option>
+                    <option value="fahrenheit">
+                        &#176Fahrenheit
+                    </option>
+                </select>
+                <br>
+                <input type="submit" name="temp" id="submit">
+                <br>
+                <span id="result" type="border-box"></span>
+            </form>
+        </fieldset>
+    </div> 
+</body>
+</html>
